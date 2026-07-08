@@ -1,0 +1,8 @@
+# Environment variables file.
+.env  
+
+# Virtual environment folder
+.venv
+
+# Testing ideas
+test.py
