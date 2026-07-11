@@ -30,7 +30,7 @@ def parse_weather_response(raw_data):
         dates = daily["time"]
         temp_max = daily["temperature_2m_max"]
         temp_min = daily["temperature_2m_min"]
-        precip = daily["precipitation_sum"]
+        precipitation = daily["precipitation_sum"]
         wind = daily["wind_speed_10m_max"]
     except KeyError as e:
         print(f"API response is missing an expected field: {e}")
@@ -43,7 +43,7 @@ def parse_weather_response(raw_data):
             "date" : dates[i],
             "temp_max" : temp_max[i],
             "temp_min" : temp_min[i],
-            "precip" : precip[i],
+            "precipitation" : precipitation[i],
             "wind" : wind[i]
         }
         records.append(record)
@@ -52,7 +52,7 @@ def parse_weather_response(raw_data):
 def save_to_csv(records, filename):
     try: 
         with open(filename, "w", newline="") as csvfile:
-            fieldnames = ["date", "temp_max", "temp_min", "precip", "wind"]
+            fieldnames = ["date", "temp_max", "temp_min", "precipitation", "wind"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for record in records:
@@ -74,7 +74,7 @@ def format_summary(daily_records):
     for record in daily_records:
         temp_max = float(record["temp_max"])
         temp_min = float(record["temp_min"])
-        precip = float(record["precip"])
+        precip = float(record["precipitation"])
         wind = float(record["wind"])
         date = record["date"]
         
